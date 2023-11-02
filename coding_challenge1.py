@@ -1,14 +1,26 @@
-### Coding Challenge 1 ### 
+### Coding Challenge 1 ###
 
 # Binary numbers are made of only 0 and 1.
 # How many n-digit binary numbers are there that don't have two adjacent 1 bits?
 
-""" 1 - Make a function
-	Inputs: Positive integer
-	Returns: List of strings of all binary numbers of that length """
+""" 
+1 - Generate a list of binary numbers of a specified length without adjacent 1 bits
     
-# Define a function that generates binary numbers of a specified length 'n' without adjacent 1 bits
+    Inputs:
+        n (int): The length of binary numbers to generate.
+    Returns:
+        list of str: A list of binary numbers without adjacent 1 bits.
+    Raises:
+        TypeError: If n is not an integer.
+        Exception: If n is not a positive integer.
+"""
+
 def list_binary_n(n):
+    if not isinstance(n, int):
+        raise TypeError("n should be an integer.")
+    if n <= 0:
+        raise Exception("n should be a positive integer.")
+
     # Define an inner function that generates binary strings
     def list_binary_str(n, s=""):
         # If n is 0, return a list containing the current binary string 's'
@@ -25,15 +37,29 @@ def list_binary_n(n):
 
     return list_binary_str(n)
 
-""" 2 - Make a function
-	Inputs: List of strings
-	Returns: Integer (all binary numbers in the input which have no neighbouring 1 bits) """
+""" 
+2 - Count the number of binary numbers without adjacent 1 bits in a list
+    
+    Inputs:
+        binary_n (list of str): A list of binary numbers.
+    Returns:
+        int: The count of binary numbers without adjacent 1 bits.
+    Raises:
+        TypeError: If binary_n is not a list or its elements are not strings.
+        Exception: If binary_n is an empty list.
+"""
 
-# Define a function that counts the number of binary numbers without adjacent 1 bits in a list
 def count_binary_n_without_adj1(binary_n):
+    if not isinstance(binary_n, list):
+        raise TypeError("binary_n should be a list.")
+    if not all(isinstance(num, str) for num in binary_n):
+        raise TypeError("Elements of binary_n should be strings.")
+    if len(binary_n) == 0:
+        raise Exception("binary_n should not be an empty list.")
+
     count = 0
     for num in binary_n:
-        # Create marker to see if there are two 1s next to each other in the binary string
+        # Create a marker to see if there are two 1s next to each other in the binary string
         has_adj1 = False
         for i in range(len(num) - 1):
             # Check for "11" (adjacent 1s) in the binary string
@@ -46,8 +72,24 @@ def count_binary_n_without_adj1(binary_n):
             
     return count
 
-# Define a function that generates a pattern of counts for binary numbers of different lengths
+""" 
+3 - Generate a pattern of counts for binary numbers of different lengths
+    
+    Inputs:
+        max_length (int): The maximum length of binary numbers to consider.
+    Returns:
+        dict: A dictionary containing the counts of binary numbers without adjacent 1 bits for different lengths.
+    Raises:
+        TypeError: If max_length is not an integer.
+        Exception: If max_length is not a positive integer.
+"""
+
 def create_pattern(max_length):
+    if not isinstance(max_length, int):
+        raise TypeError("max_length should be an integer.")
+    if max_length <= 0:
+        raise Exception("max_length should be a positive integer.")
+
     pattern = {}
     for n in range(1, max_length + 1):
         # Generate binary numbers of length 'n'
@@ -59,26 +101,39 @@ def create_pattern(max_length):
 
     return pattern
 
-""" 3 - Make a table / dictionary / print function / other logical structure of your choice
-	Column 1: Number of digits
-	Column 2: Count of binary numbers that don't have neighbouring 1 bits """
+""" 
+4 - Print the pattern of counts in a formatted table
+    
+    Inputs:
+        pattern (dict): A dictionary containing the counts of binary numbers without adjacent 1 bits for different lengths.
+    Returns:
+        None
+    Raises:
+        TypeError: If pattern is not a dictionary.
+        Exception: If pattern is an empty dictionary.
+"""
 
-# Define a function to print the pattern in a formatted table
 def print_pattern(pattern):
+    if not isinstance(pattern, dict):
+        raise TypeError("pattern should be a dictionary.")
+    if not pattern:
+        raise Exception("pattern should not be an empty dictionary.")
+
     print("Number of Digits | Count of Binary Numbers Without Adjacent 1s")
     for n, count in pattern.items():
         # Format and print the pattern with the number of digits and the count
         print(f"{n:16} | {count:40}")
-        
+
 # Example usage:
 max_length = 15
 pattern = create_pattern(max_length)
 print_pattern(pattern)
 
-""" 4/5 - Work out the pattern in words & explain/justify why the pattern exists """
-
-# Pattern is similar to the fibinocci sequence as with each new digit added the choices are determined by the ending digit of the existing number.
-# The pattern is the way it is because when adding a new digit to the end of a binary number (without repeating 1s) there are only two possibilities:
-# If the last digit is 0, you can add either 0 or 1
-# If the last digit is 1, you can only add 1
-# Therefor Fn = F(n-1) + F(n-2)
+""" 
+5 - Explain the pattern of binary numbers without adjacent 1 bits
+The pattern is similar to the Fibonacci sequence as with each new digit added the choices are determined by the ending digit of the existing number.
+The pattern is the way it is because when adding a new digit to the end of a binary number (without repeating 1s) there are only two possibilities:
+    - If the last digit is 0, you can add either 0 or 1.
+    - If the last digit is 1, you can only add 1.
+Therefore, Fn = F(n-1) + F(n-2)
+"""
