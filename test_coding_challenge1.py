@@ -1,4 +1,4 @@
-# Import pytest module
+# Import pytest
 import pytest
 
 # Import the functions to be tested
@@ -18,9 +18,20 @@ def test_list_binary_2():
     # Assert that the result of list_binary_n(2) matches the expected binary numbers
     assert list_binary_n(2) == ['00', '01', '10']
 
+# Test 3: 
+def test_list_binary_n_11():
+    
+    # Generate binary numbers for a range of lengths
+    for n in range(1, 10):
+        binary_numbers = list_binary_n(n)
+        
+        # Check if there are no adjacent 1s in any of the binary numbers
+        for binary_number in binary_numbers:
+            assert "11" not in binary_number
+
 """ Tests for the count_binary_n_without_adj1 function """
 
-# Test 3: Test if count_binary_n_without_adj1 handles a non-list input
+# Test 4: Test if count_binary_n_without_adj1 handles a non-list input
 def test_count_binary_n_without_adj1_non_list():
     
     # Use pytest.raises to check if a TypeError is raised
@@ -29,7 +40,7 @@ def test_count_binary_n_without_adj1_non_list():
         # Call count_binary_n_without_adj1 with a non-list input "invalid"
         count_binary_n_without_adj1("invalid")
 
-# Test 4: Test if count_binary_n_without_adj1 handles a list with non-string elements
+# Test 5: Test if count_binary_n_without_adj1 handles a list with non-string elements
 def test_count_binary_n_without_adj1_non_string():
     
     # Use pytest.raises to check if a TypeError is raised
@@ -38,7 +49,7 @@ def test_count_binary_n_without_adj1_non_string():
         # Call count_binary_n_without_adj1 with a list containing non-string elements
         count_binary_n_without_adj1([1, 2, 3])
 
-# Test 5: Test if count_binary_n_without_adj1 handles an empty list
+# Test 6: Test if count_binary_n_without_adj1 handles an empty list
 def test_count_binary_n_without_adj1_empty_list():
     
     # Use pytest.raises to check if an Exception is raised
@@ -48,9 +59,9 @@ def test_count_binary_n_without_adj1_empty_list():
         count_binary_n_without_adj1([])
     
     
-""" Tests for the create_pattern function to check for a Fibonacci sequence"""
+""" Tests for the create_pattern function"""
 
-# Test 6: Test if create_pattern produces a Fibonacci sequence for max_length=12
+# Test 7: Test if create_pattern produces a Fibonacci sequence for max_length=12
 def test_create_pattern_fibonacci():
     
     # Test with a pattern up to 12 (or any suitable limit)
