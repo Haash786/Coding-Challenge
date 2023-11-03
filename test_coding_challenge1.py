@@ -18,7 +18,7 @@ def test_list_binary_2():
     # Assert that the result of list_binary_n(2) matches the expected binary numbers
     assert list_binary_n(2) == ['00', '01', '10']
 
-# Test 3: 
+# Test 3: Test if no adjacent 11 in list_binary_n
 def test_list_binary_n_11():
     
     # Generate binary numbers for a range of lengths
